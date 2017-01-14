@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="BIG5">
+<title>Mine Swepper!</title>
+
+
+<script src="jquery-1.6.2.js"></script>
+<script type='text/javascript'
+	src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js'></script>
+<link rel="stylesheet" href="css/Minestyles.css">
+<script src="js/Minestyles.js"></script>
+</head>
+<body>
+	<center>
+		size : <select id="input" onchange="setMineNum()" style="width: 100px">
+
+			<option value="" disabled selected style="display: none;">be
+				choose</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+			<option value="8">8</option>
+			<option value="9">9</option>
+			<option value="10">10</option>
+		</select>
+		<p></p>
+		<div id="second">number of bombs :</div>
+	</center>
+	<p></p>
+	<center>
+
+		<div id="screen"></div>
+	</center>
+
+	<div class="modal"></div>
+</body>
+</html>
