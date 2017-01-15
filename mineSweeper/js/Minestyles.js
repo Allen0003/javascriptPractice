@@ -1,5 +1,3 @@
-var isSafari = navigator.userAgent.search("Safari") > -1;// Google瀏覽器是用這核心
-
 var mineInfo = [];
 var minesTotal;
 var aiFlag = true;
@@ -21,51 +19,42 @@ function reflushAgain(id) {
 function setMineNum() {
 	reflushAgain("second");
 	var second = document.getElementById("second");
-	var maxMineNum;
-	var num = document.getElementById("input").value; // 長跟寬
+	var num = $("#input option:selected").val(); // length and width
 
-	maxMineNum = (num * num) / 2
-	var select2 = document.createElement("select");
-	select2.setAttribute("id", "minesTotal");
+	var maxMineNum = (num * num) / 2
 
-	if (isSafari) {
-		select2.setAttribute("onchange", "begin();");
-		select2.style.width = "100px";
-	} else {
-		select2.style.setAttribute("cssText", "width: 100px;");
-		select2.onchange = function() {
-			begin();
-		}; // for IE
-	}
+	var select2 = $("<select></select>").attr({
+		"id" : 'minesTotal',
+		"width" : '100px'
+	});
 
-	var option = document.createElement("option");
-	option.setAttribute("value", "");
-	option.innerHTML = "be choose";
-	option.disabled = true;
-	option.selected = true;
-
-	if (isSafari) {
-		option.style.display = "none";
-	} else {
-		option.style.setAttribute("display", "none;");
-	}
+	var option = $("<option></option>").attr({
+		"value" : 'be choose',
+		"disabled" : 'disabled',
+		"selected" : 'selected',
+		"display" : 'none'
+	}).text('be choose');
 
 	$(option).hide().appendTo(select2).fadeIn(300);
 
 	for (var i = 3; i < maxMineNum; i++) {
-		var option = document.createElement("option");
-		option.setAttribute("value", i);
-		option.innerHTML = i;
+		var option = $("<option></option>").attr({
+			"value" : i
+		}).text(i);
 		$(option).hide().appendTo(select2).fadeIn(300);
 	}
 
-	$(select2).hide().appendTo(second).fadeIn(300);
+	$(select2).hide().appendTo($("#second")).fadeIn(300).on("change", function(event) { 
+    	begin();
+} );
+
+
 }
 
 function begin() {
 	reflushAgain("screen");
-	var num = document.getElementById("input").value;
-	minesTotal = document.getElementById("minesTotal").value;
+	var num = $("#input").val();
+	minesTotal = $("#minesTotal").val();
 	for (var x = 0; x < num; x++) {
 		mineInfo[x] = [];
 		recordAlreadyPass[x] = [];
@@ -74,63 +63,43 @@ function begin() {
 			mineInfo[x][y] = 0;
 			recordAlreadyPass[x][y] = -1; // -1 is uncover area
 			oddTable[x][y] = minesTotal / (num * num); // 100 ---> open 99
-														// ----> 100%die
+			// ----> 100%die
 		}
 	}
 	for (var i = 0; i < minesTotal; i++) {
 		setMine(num, mineInfo);
 	}
-
 	setScreen(num);
 }
 
 function setScreen(num) {
-	var screen = document.getElementById("screen");
-
 	for (var i = 0; i < num; i++) {
-		var enclose = document.createElement("div");
-		screen.appendChild(enclose);
+
 		var wid = num * 22 + num * 10;
-		if (isSafari) {
-			enclose.style.height = "22px";
-			enclose.style.width = wid + "px";
-		} else {
-			enclose.style.setAttribute("cssText", "height:22px ; width:" + wid
-					+ "px; ");
-		}
+		var enclose = $("<div></div>").css({
+			"height" : '22px',
+			"width" : wid + "px"
+		});
+
+		$("#screen").append(enclose).fadeIn(300);
 
 		for (var j = 0; j < num; j++) {
+			var divField = $("<div></div>").css({
+				"height" : '22px',
+				"width" : '22px',
+				"cursor" : 'pointer',
+				"border-style" : 'outset',
+				"float" : 'left',
+				"border-width" : '5px',
+				"border-color" : 'gray',
+				"background-color" : 'gray'				//"id" : i + "," + j
+			}).attr({
+		"id" : i + "," + j})
 
-			var divField = document.createElement("div");
-			if (isSafari) {
-				divField.style.height = "22px";
-				divField.style.width = wid + "px";
-				divField.setAttribute("id", i + "," + j);
 
-				divField.style.cursor = "pointer";
-
-				divField.style.borderstyle = "outset";
-				divField.style.float = "left";
-				divField.style.borderwidth = "5px";
-				divField.style.borderbordercolor = "gray";
-				divField.style.borderbackgroundcolor = "gray";
-				// divField.setAttribute("onclick", "pressDiv(this.id,num);" );
-				// *************
-			} else {
-				divField.style
-						.setAttribute(
-								"cssText",
-								"height:22px ; width:22px; cursor:pointer; border-style:outset; float:left;  border-width:5px; border-color:gray ;background-color: gray ; ");
-				// divField.style.setAttribute("cssText", "height:22px ;
-				// width:"+wid+"px; ");
-				divField.setAttribute("id", i + "," + j);
-				divField.onclick = function() {
-					pressDiv(this.id, num);
-				}; // for IE
-			}
-
-			$(divField).hide().appendTo(enclose).fadeIn(1000);
-
+			.click(function() {
+				pressDiv(this.id, num);
+			}).hide().appendTo(enclose).fadeIn(1000);
 		}
 	}
 }
@@ -145,12 +114,12 @@ function setMine(num, mineInfo) {
 	} else {
 		setMine(num, mineInfo);
 	}
-
 }
 
 function pressDiv(id, num) {
-
+	// here ******************
 	var xy = new Array();
+
 	xy = id.split(",");
 
 	var x = xy[0];
@@ -158,37 +127,56 @@ function pressDiv(id, num) {
 
 	recordAlreadyPass[x][y] = getNumberOfMine(x, y, num);
 	oddTable[x][y] = 1;
-	var show = document.getElementById(id);
+
+	var show = $("#"+id);
 	if (mineInfo[x][y] == 1) {
-		show.innerHTML = "X";
-		show.style
-				.setAttribute(
-						"cssText",
-						"height:22px ; width:22px; cursor:pointer; border-style:inset; float:left;  border-width:5px; border-color:gray ;background-color: white ; ");
-		alert("byr");
-		if (!aiFlag) { // ai choose
-			alert("ok u win the stupid ai , whatever if u feel happey that's u choose");
-		} else {
-			alert("asshole, you're never gonna no sense to play the game there ain't no way that you'll win");
-		}
-		aiFlag = false;
-		begin();
+		// show.innerHTML = "X";
+		// show.style
+		// .setAttribute(
+		// "cssText",
+		// "height:22px ; width:22px; cursor:pointer; border-style:inset;
+		// float:left; border-width:5px; border-color:gray ;background-color:
+		// white ; ");
+		// alert("byr");
+		// if (!aiFlag) { // ai choose
+		// alert("ok u win the stupid ai , whatever if u feel happey that's u
+		// choose");
+		// } else {
+		// alert("asshole, you're never gonna no sense to play the game there
+		// ain't no way that you'll win");
+		// }
+		// aiFlag = false;
+		// begin();
 	} else {
-		show.style
-				.setAttribute(
-						"cssText",
-						"height:22px ; width:22px; cursor:pointer; border-style:inset; float:left;  border-width:5px; border-color:gray  ; background-color: white ; ");
-		show.innerHTML = getNumberOfMine(x, y, num);
+		$("#"+id).css({
+			"height": '22px',
+			"width": '22px',
+			"cursor": "pointer",
+			"border-style" : "inset",
+			"float" : "left",
+			"border-width" : "5px",
+			"border-color" : "gray",
+"background-color" : 'white'
+		});
+		alert("q");	
+		// show.style
+		// 		.setAttribute(
+		// 				"cssText",
+		// 				"height:22px ; width:22px;
+		// 				 cursor:pointer; border-style:inset; float:left; 
+		// 				  border-width:5px; border-color:gray  ;
+		// 				   background-color: white ; ");
+		//show.innerHTML = getNumberOfMine(x, y, num);
 
 	}
 
-	if (aiFlag) { // start AI
-		wait(1000);
-		setTimeout(function() {
-			startAI(num, recordAlreadyPass);
-		}, 1003);
-	}
-	aiFlag = true;
+	// if (aiFlag) { // start AI
+	// wait(1000);
+	// setTimeout(function() {
+	// startAI(num, recordAlreadyPass);
+	// }, 1003);
+	// }
+	// aiFlag = true;
 }
 
 function startAI(num, recordAlreadyPass) {
