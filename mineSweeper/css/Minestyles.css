@@ -1,3 +1,25 @@
+.convered {
+	height: 22px;
+	width: 22px;
+	cursor: pointer;
+	border-style: outset;
+	float: left;
+	border-width: 5px;
+	border-color: gray;
+	background-color: gray;
+}
+
+.discovered {
+	height: 22px;
+	width: 22px;
+	cursor: pointer;
+	border-style: inset;
+	float: left;
+	border-width: 5px;
+	border-color: gray;
+	background-color: white;
+}
+
 .modal {
 	display: none;
 	position: fixed;
@@ -6,8 +28,8 @@
 	left: 0;
 	height: 100%;
 	width: 100%;
-	background: rgba(255, 255, 255, .8)
-		url('http://sampsonresume.com/labs/pIkfp.gif') 50% 50% no-repeat;
+	background: rgba(255, 255, 255, .8) url('../img/pIkfp.gif') 50% 50%
+		no-repeat;
 }
 
 body.loading {
