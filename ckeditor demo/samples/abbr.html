@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<script src="../vendor/ckeditor/ckeditor.js"></script>
+</head>
+
+<body>
+
+	<form action="http://127.0.0.1:8080/TestWebServer/HelloWorld" method="post">
+		<textarea id="editor1" name="editor1">
+		&lt;p&gt;This is some sample text.
+		</textarea>
+		<br><br>
+		<input type="submit" value="Submit">
+	</form>
+
+	<script>
+		CKEDITOR.replace('editor1', {});
+	</script>
+</body>
+
+</html>
