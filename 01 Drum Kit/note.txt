@@ -1,0 +1,43 @@
+1. CSS3 'transitions' allows you to change property values smoothly (from one value to another), over a given duration.
+https://www.w3schools.com/css/css3_transitions.asp
+
+2. you can create your own html attribute yourself, but you need to start with data- Ex: data-key
+https://www.w3schools.com/tags/att_global_data.asp
+
+3. <audio src="sound/a.mp3"></audio>
+  element.play()
+  element.currentTime
+
+4. window.addEventListener ==> you can add a Listener event
+https://www.w3schools.com/js/js_htmldom_eventlistener.asp
+
+5.  document.querySelector ==> can do thing like JQuery selector
+https://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_document_queryselector_class
+
+6. template string
+let str = '<div data-key="' + key + '">' +
+         '<button>click me</button>' +
+         '</div>';
+
+let str = `<div data-key="${key}">
+          <button>click me</button>
+          </div>`;
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
+
+7. let (local) vs var (global) and const (final)
+
+"let" allows you to declare variables that are limited in scope to the block, statement, or expression on which it is used. This is unlike the "var" keyword, which defines a variable globally, or locally to an entire function regardless of block scope.
+
+"const" you have values that you dont want changed or that will never change
+
+8. audio tag + play() function ==> play
+https://www.w3schools.com/jsref/met_audio_play.asp
+
+9. add class
+obj.classList.add
+https://stackoverflow.com/questions/195951/change-an-elements-class-with-javascript
+
+10. JavaScript transitionend
+The transitionend event occurs when a CSS transition has completed.
+document.getElementById("myDIV").addEventListener("transitionend", myFunction);
+https://www.w3schools.com/jsref/event_transitionend.asp
