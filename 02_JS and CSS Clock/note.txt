@@ -1,0 +1,16 @@
+
+
+1. css transform origin
+The transform-origin property allows you to change the position of transformed elements.
+https://www.w3schools.com/cssref/css3_pr_transform-origin.asp
+
+2. css transition
+To create a transition effect, you must specify two things:
+
+the CSS property you want to add an effect to
+the duration of the effect
+https://www.w3schools.com/css/css3_transitions.asp
+
+3. css transition-timing-function:
+The transition-timing-function property specifies the speed "curve" of the transition effect.
+https://www.w3schools.com/cssref/css3_pr_transition-timing-function.asp
