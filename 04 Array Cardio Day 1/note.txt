@@ -1,0 +1,28 @@
+1. javascript console.table
+Displays tabular data as a table.
+https://developer.mozilla.org/en-US/docs/Web/API/Console/table
+
+2. javascript array => filter
+The filter() method creates an array filled with all array elements that pass a test (provided as a function).
+https://www.w3schools.com/jsref/jsref_filter.asp
+
+3. javascript array => map
+The map() method creates a new array with the results of calling a function for every array element.
+https://www.w3schools.com/jsref/jsref_map.asp
+
+4. javascript array => reduce
+
+before:
+let totalYears = 0;
+for (let i = 0; i < inventors.length; i++) {
+    let liveYear = inventors[i].passed - inventors[i].year;
+    totalYears += liveYear;
+}
+
+Syntax:
+array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
+
+
+The reduce() method reduces the array to a single value.
+The reduce() method executes a provided function for each value of the array (from left-to-right).
+https://www.w3schools.com/jsref/jsref_reduce.asp
