@@ -1,0 +1,16 @@
+1. css3 flex
+The flex property specifies the length of the item,
+relative to the rest of the flexible items inside the same container.
+https://www.w3schools.com/cssref/css3_pr_flex.asp
+
+2. css3 justify-content
+The justify-content property aligns the flexible container's items
+when the items do not use all available space on the main-axis (horizontally).
+https://www.w3schools.com/cssref/css3_pr_justify-content.asp
+
+3. *** css ****
+To create a transition effect, you must specify two things:
+
+i. the CSS property you want to add an effect to
+ii. the duration of the effect
+https://www.w3schools.com/css/css3_transitions.asp
